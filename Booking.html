@@ -100,64 +100,7 @@
             border: none;
             margin-top: 30px;
         }
-
-        /* Styles for Form Elements if not using Iframe */
-        .booking-form {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: left;
-        }
-
-        .booking-form .form-group {
-            margin-bottom: 20px;
-        }
-
-        .booking-form label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .booking-form input,
-        .booking-form textarea {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .booking-form textarea {
-            height: 150px;
-            resize: none;
-        }
-
-        .booking-form .btn {
-            display: inline-block;
-            background: #1b5e20;
-            color: white;
-            padding: 14px 30px;
-            font-size: 18px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s ease, transform 0.2s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .booking-form .btn:hover {
-            background: #4caf50;
-            transform: scale(1.05);
-        }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
-    <script>
-        (function(){
-            emailjs.init("Bptky9FEzzQVs8pU0");
-        })();
-    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -184,8 +127,7 @@
         <!-- Embed Form in Iframe -->
         <iframe src="https://formspree.io/f/mnqgzdwp" title="Booking Form"></iframe>
 
-        <!-- Alternatively, you can use the local form below by uncommenting -->
-        <!-- 
+        <!-- If you want to use a local form instead, uncomment this block:
         <form class="booking-form" id="booking-form">
             <div class="form-group">
                 <label for="name">Name</label>
@@ -218,7 +160,7 @@
     </section>
 
     <script>
-        // If using the local form (uncomment the form and this script section):
+        // If you want to use the local form (uncomment the form and script below):
         // document.getElementById('booking-form').addEventListener('submit', function(event) {
         //     event.preventDefault();
         //
