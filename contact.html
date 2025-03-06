@@ -162,120 +162,32 @@
     </iframe>
 </section>
 
-<!-- Contact Form embedded in iframe -->
+<!-- Contact Form Section -->
 <section class="contact-form-box">
     <h2>Send us a Message</h2>
-    <!-- iframe embedding your contact form -->
-    <iframe srcdoc="
-        <!DOCTYPE html>
-        <html lang='en'>
-        <head>
-            <meta charset='UTF-8'>
-            <meta name='viewport' content='width=device-width, initial-scale=1'>
-            <title>Contact Form</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    background-color: #f4f4f4;
-                    padding: 20px;
-                }
+    <!-- Actual Contact Form -->
+    <form id="contact-form">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+        </div>
 
-                .form-group {
-                    margin-bottom: 15px;
-                }
+        <div class="form-group">
+            <label for="email">Your Email Here:</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+        </div>
 
-                label {
-                    font-weight: bold;
-                    display: block;
-                    margin-bottom: 5px;
-                }
+        <div class="form-group">
+            <label for="message">What's your message?</label>
+            <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
+        </div>
 
-                input[type='text'], input[type='email'], textarea {
-                    width: 100%;
-                    padding: 10px;
-                    border-radius: 5px;
-                    border: 1px solid #ccc;
-                    margin-bottom: 10px;
-                }
-
-                button {
-                    background-color: #28a745;
-                    color: white;
-                    padding: 10px 20px;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                }
-
-                button:hover {
-                    background-color: #218838;
-                }
-
-                .response-message {
-                    color: green;
-                    font-weight: bold;
-                }
-
-                .error-message {
-                    color: red;
-                    font-weight: bold;
-                }
-            </style>
-        </head>
-        <body>
-
-        <h2>Contact Us Form</h2>
-        <form id='contact-form'>
-            <div class='form-group'>
-                <label for='name'>Name:</label>
-                <input type='text' id='name' name='name' placeholder='Your Name' required>
-            </div>
-            <div class='form-group'>
-                <label for='email'>Email:</label>
-                <input type='email' id='email' name='email' placeholder='Your Email' required>
-            </div>
-            <div class='form-group'>
-                <label for='message'>Message:</label>
-                <textarea id='message' name='message' placeholder='Your message here...' required></textarea>
-            </div>
-            <button type='submit'>Send Message</button>
-            <p id='response-message'></p>
-        </form>
-
-        <script>
-            document.getElementById('contact-form').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the form from submitting the default way
-
-                // Form values
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const message = document.getElementById('message').value;
-
-                // Send the form data to the backend or email service here
-                fetch('http://localhost:3000/send-email', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ name, email, message })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('response-message').textContent = 'Message sent successfully!';
-                    document.getElementById('response-message').className = 'response-message';
-                })
-                .catch(error => {
-                    document.getElementById('response-message').textContent = 'Error sending message. Please try again.';
-                    document.getElementById('response-message').className = 'error-message';
-                });
-            });
-        </script>
-
-        </body>
-        </html>" height="600" width="100%"></iframe>
+        <button type="submit">Submit Now</button>
+        <p id="response-message"></p>
+    </form>
 </section>
 
-<!-- Socials -->
+<!-- Socials Section -->
 <section class="social-links-box">
     <h2>Follow Us On Our Social Media</h2>
     <p>Check for offers and updates!</p>
@@ -285,6 +197,42 @@
         <li><a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
     </ul>
 </section>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    // EmailJS with this user ID
+    emailjs.init("Bptky9FEzzQVs8pU0");
+
+    // contact form
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // values from input 
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        // Send the email using EmailJS online
+        emailjs.send("service_ogg0zqk", "template_cy3x2oq", {  
+            from_name: name,
+            from_email: email,
+            message: message
+        }).then(
+            function(response) {
+                // Sent
+                document.getElementById("response-message").innerText = "Message sent!";
+                document.getElementById("response-message").style.color = "green";
+                document.getElementById("contact-form").reset(); // Reset the form
+            },
+            function(error) {
+                // error, didn't send 
+                document.getElementById("response-message").innerText = "Message failed to send. Please try again.";
+                document.getElementById("response-message").style.color = "red";
+            }
+        );
+    });
+</script>
 
 <footer>
     <p>&copy; 2025 Zaf Roof Cleaning. All rights reserved.</p>
