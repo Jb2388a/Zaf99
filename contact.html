@@ -166,11 +166,12 @@
 <section class="contact-form-box">
     <h2>Send us a Message</h2>
     <!-- iframe embedding your contact form -->
-    <iframe>
-        <html lang="en">
+    <iframe srcdoc="
+        <!DOCTYPE html>
+        <html lang='en'>
         <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1'>
             <title>Contact Form</title>
             <style>
                 body {
@@ -189,7 +190,7 @@
                     margin-bottom: 5px;
                 }
 
-                input[type="text"], input[type="email"], textarea {
+                input[type='text'], input[type='email'], textarea {
                     width: 100%;
                     padding: 10px;
                     border-radius: 5px;
@@ -224,31 +225,31 @@
         <body>
 
         <h2>Contact Us Form</h2>
-        <form id="contact-form">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" placeholder="Your Name" required>
+        <form id='contact-form'>
+            <div class='form-group'>
+                <label for='name'>Name:</label>
+                <input type='text' id='name' name='name' placeholder='Your Name' required>
             </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Your Email" required>
+            <div class='form-group'>
+                <label for='email'>Email:</label>
+                <input type='email' id='email' name='email' placeholder='Your Email' required>
             </div>
-            <div class="form-group">
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
+            <div class='form-group'>
+                <label for='message'>Message:</label>
+                <textarea id='message' name='message' placeholder='Your message here...' required></textarea>
             </div>
-            <button type="submit">Send Message</button>
-            <p id="response-message"></p>
+            <button type='submit'>Send Message</button>
+            <p id='response-message'></p>
         </form>
 
         <script>
-            document.getElementById("contact-form").addEventListener("submit", function(event) {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
                 event.preventDefault(); // Prevent the form from submitting the default way
 
                 // Form values
-                const name = document.getElementById("name").value;
-                const email = document.getElementById("email").value;
-                const message = document.getElementById("message").value;
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
 
                 // Send the form data to the backend or email service here
                 fetch('http://localhost:3000/send-email', {
@@ -260,19 +261,18 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById("response-message").textContent = 'Message sent successfully!';
-                    document.getElementById("response-message").className = 'response-message';
+                    document.getElementById('response-message').textContent = 'Message sent successfully!';
+                    document.getElementById('response-message').className = 'response-message';
                 })
                 .catch(error => {
-                    document.getElementById("response-message").textContent = 'Error sending message. Please try again.';
-                    document.getElementById("response-message").className = 'error-message';
+                    document.getElementById('response-message').textContent = 'Error sending message. Please try again.';
+                    document.getElementById('response-message').className = 'error-message';
                 });
             });
         </script>
 
         </body>
-        </html>
-    </iframe>
+        </html>" height="600" width="100%"></iframe>
 </section>
 
 <!-- Socials -->
